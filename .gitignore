@@ -1,6 +1,54 @@
 # Compiled class file
 *.class
 
+target/
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files and Build #
+*.jar
+*.war
+*.ear
+target
+node_modules
+
+### Gradle ###
+# Exclude Folder List #
+.gradle/
+build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Eclipse ###
+.classpath
+.project
+.settings/
+
+### VS Code ###
+.vscode/
+
+# Compiled class file
+*.class
+
 # Log file
 *.log
 
