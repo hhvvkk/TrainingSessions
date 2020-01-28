@@ -21,7 +21,7 @@ public class EnglishConvertNumberToNameServiceTest {
         otherNumbers.put(5, "five");
         otherNumbers.put(9, "nine");
         otherNumbers.put(18, "eighteen");
-        otherNumbers.put(20, "twenty");
+        otherNumbers.put(19, "nineteen");
     }
 
     @Test

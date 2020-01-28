@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 public class EnglishConvertNumberToNameService {
 
     public String convertToString(int i) {
-        if (i == 1) {
-            return "one";
-        }
-        return "";
+        return NumNames.NUM_NAMES[i % 20];
     }
 
 }
