@@ -26,11 +26,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureTestDatabase
 public class CurrencyIntegrationTesting {
 
     //Test database configuration H2
-    //https://stackoverflow.com/questions/32001391/configure-specific-in-memory-database-for-testing-purpose-in-spring/55862900#55862900
+    // https://stackoverflow.com/questions/32001391/configure-specific-in-memory-database-for-testing-purpose-in-spring/55862900#55862900
+    // Run self contained in-memory tests
+    // https://www.baeldung.com/spring-jpa-test-in-memory-database
+
+    // TODO currently we have two application.properties - 1) main/resources & 2) test/resources
+    // HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
 
     @Autowired
     private MockMvc mockMvc;
