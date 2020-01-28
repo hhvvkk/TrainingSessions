@@ -32,7 +32,7 @@ public class CurrencyController {
     }
 
     @PostMapping
-    public CurrencyDTO findAllCurrencies(@RequestBody CurrencyDTO requestDTO) {
+    public CurrencyDTO save(@RequestBody CurrencyDTO requestDTO) {
         Currency currency = currencyService.save(requestDTO.getType(), requestDTO.getValue());
         return currencyMapper.toDTO(currency);
     }
