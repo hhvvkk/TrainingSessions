@@ -1,9 +1,9 @@
-drop table if exists article;
+drop table if exists currency;
 
-create table article
+create table currency
 (
-    id bigserial not null constraint article_primary_key primary key,
-    visible boolean not null default false,
-    content varchar(255) not null,
-    modified_date timestamp not null
+    id bigserial not null constraint currency_primary_key primary key,
+    type varchar(80) not null,
+    currency_value int not null,
+    english_number_name varchar(500) not null
 );
