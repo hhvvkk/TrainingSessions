@@ -1,5 +1,7 @@
 package com.example.tdd.currency;
 
+import com.example.tdd.currency.constants.NumNames;
+import com.example.tdd.currency.constants.TensNames;
 import org.springframework.stereotype.Service;
 
 @Service

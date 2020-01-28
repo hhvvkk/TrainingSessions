@@ -1,4 +1,4 @@
-package com.example.tdd.currency;
+package com.example.tdd.currency.constants;
 
 public class TensNames {
 
