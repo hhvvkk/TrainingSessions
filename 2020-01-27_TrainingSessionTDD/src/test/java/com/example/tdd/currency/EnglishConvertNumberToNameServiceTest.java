@@ -3,10 +3,10 @@ package com.example.tdd.currency;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class EnglishConvertOneToNameServiceTest {
+public class EnglishConvertNumberToNameServiceTest {
 
-    private EnglishConvertOneToNameService englishConvertOneToNameService
-            = new EnglishConvertOneToNameService();
+    private EnglishConvertNumberToNameService englishConvertOneToNameService
+            = new EnglishConvertNumberToNameService();
 
     @Test
     public void shouldReturnValidStringAsNumber() {
