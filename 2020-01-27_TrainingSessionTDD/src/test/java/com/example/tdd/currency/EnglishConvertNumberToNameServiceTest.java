@@ -12,10 +12,10 @@ public class EnglishConvertNumberToNameServiceTest {
     private EnglishConvertNumberToNameService englishNumberNameService
             = new EnglishConvertNumberToNameService();
 
-    private final Map<Integer, String> otherNumbers = new HashMap<>();
+    private static final Map<Integer, String> otherNumbers = new HashMap<>();
 
     @BeforeAll
-    public void init() {
+    static void init() {
         otherNumbers.put(1, "one");
         otherNumbers.put(2, "two");
         otherNumbers.put(5, "five");
