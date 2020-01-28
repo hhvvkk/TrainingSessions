@@ -22,6 +22,16 @@ public class EnglishConvertNumberToNameServiceTest {
         otherNumbers.put(9, "nine");
         otherNumbers.put(18, "eighteen");
         otherNumbers.put(19, "nineteen");
+        otherNumbers.put(21, "twenty one");
+        otherNumbers.put(34, "thirty four");
+        otherNumbers.put(99, "ninety nine");
+        otherNumbers.put(105, "one hundred five");
+        otherNumbers.put(100, "one hundred");
+        otherNumbers.put(200, "two hundred");
+        otherNumbers.put(300, "three hundred");
+        otherNumbers.put(507, "five hundred seven");
+        otherNumbers.put(998, "nine hundred ninety eight");
+        otherNumbers.put(999, "nine hundred ninety nine");
     }
 
     @Test
