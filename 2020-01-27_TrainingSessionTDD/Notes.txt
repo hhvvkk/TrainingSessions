@@ -5,26 +5,3 @@ Annotations:
     @BeforeAll: Code that executes before all other tests are executed
 
 
-
-    private EnglishNumberNameService englishNumberNameService
-            = new EnglishNumberNameService();
-
-    Map<Integer, String> otherNumbers = new HashMap<>();
-
-    @BeforeAll
-    public void init() {
-        otherNumbers.put(1, "one");
-        otherNumbers.put(2, "two");
-        otherNumbers.put(5, "five");
-        otherNumbers.put(9, "nine");
-        otherNumbers.put(18, "eighteen");
-        otherNumbers.put(20, "twenty");
-    }
-
-    @Test
-    public void shouldReturnValidStringAsNumber() {
-        for (int key : otherNumbers.keySet()) {
-            String result = englishNumberNameService.convertToString(key);
-            Assertions.assertEquals(otherNumbers.get(key), result);
-        }
-    }
