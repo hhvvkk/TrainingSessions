@@ -22,7 +22,7 @@ public class EnglishConvertNumberToNameService {
         }
 
         if (i == 0) {
-            return sofar;
+            return sofar.trim();
         }
 
         return (NumNames.NUM_NAMES[i] + " hundred " + sofar).trim();

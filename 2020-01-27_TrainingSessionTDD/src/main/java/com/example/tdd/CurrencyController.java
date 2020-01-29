@@ -34,7 +34,8 @@ public class CurrencyController {
     @PostMapping
     public CurrencyDTO save(@RequestBody CurrencyDTO requestDTO) {
         Currency currency = currencyService.save(requestDTO.getType(), requestDTO.getValue());
-        return currencyMapper.toDTO(currency);
+        CurrencyDTO currencyDTO = currencyMapper.toDTO(currency);
+        return currencyDTO;
     }
 
 

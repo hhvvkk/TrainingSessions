@@ -68,7 +68,8 @@ public class CurrencyIntegrationTesting {
 
         this.mockMvc.perform(mockHttpBuilt)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)));
+                .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)))
+                .andExpect(jsonPath("$.englishNumberName", Matchers.is("twenty")));
 //        .andExpect(jsonPath("$.orderId", is(DEFAULT_ORDER_ID)));
 
     }
