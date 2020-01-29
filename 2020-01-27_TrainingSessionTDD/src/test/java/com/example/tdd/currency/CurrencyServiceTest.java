@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 //Contract testing
+// OLD ONE WAS @RunsWith(MockitoRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class CurrencyServiceTest {
 
