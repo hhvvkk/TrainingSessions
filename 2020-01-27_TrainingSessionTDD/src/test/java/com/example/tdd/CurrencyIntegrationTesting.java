@@ -71,7 +71,24 @@ public class CurrencyIntegrationTesting {
                 .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)))
                 .andExpect(jsonPath("$.englishNumberName", Matchers.is("twenty")));
 //        .andExpect(jsonPath("$.orderId", is(DEFAULT_ORDER_ID)));
+    }
 
+    @Test
+    public void shouldThrow401OnBadCurrencyNumber() throws Exception {
+        CurrencyDTO currencyToCreate = new CurrencyDTO();
+        currencyToCreate.setValue(20);
+        //Type being set as null...
+        currencyToCreate.setType(null);
+
+        String contentAsString = mapper.writeValueAsString(currencyToCreate);
+
+        MockHttpServletRequestBuilder mockHttpBuilt =
+                post("/currency")
+                        .content(contentAsString)
+                        .header("content-type", "application/json");
+
+        this.mockMvc.perform(mockHttpBuilt)
+                .andExpect(status().is4xxClientError());
     }
 
 }

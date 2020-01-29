@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 //Contract testing
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +46,11 @@ public class CurrencyServiceTest {
         Assertions.assertEquals(RAND_CURRENCY, currency.getType());
         Assertions.assertEquals(fifteenName, currency.getEnglishNumberName());
         Assertions.assertEquals(fifteenInt, currency.getValue());
+    }
+
+    @Test
+    public void shouldThrowExceptionOnEmptyCurrency() {
+        Assertions.assertThrows(ResponseStatusException.class, () -> currencyService.save(null, 34));
     }
 
 }
