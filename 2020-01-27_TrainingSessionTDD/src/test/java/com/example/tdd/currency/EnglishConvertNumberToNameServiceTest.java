@@ -27,7 +27,7 @@ public class EnglishConvertNumberToNameServiceTest {
         otherNumbers.put(99, "ninety nine");
         otherNumbers.put(105, "one hundred five");
         otherNumbers.put(100, "one hundred");
-        otherNumbers.put(200, "two hundred");
+        otherNumbers.put(202, "two hundred two");
         otherNumbers.put(300, "three hundred");
         otherNumbers.put(507, "five hundred seven");
         otherNumbers.put(998, "nine hundred ninety eight");
