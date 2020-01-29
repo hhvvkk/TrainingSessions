@@ -4,6 +4,7 @@ import com.example.tdd.currency.CurrencyRepository;
 import com.example.tdd.currency.dto.CurrencyDTO;
 import com.example.tdd.currency.entity.CurrencyType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,9 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
+@ExtendWith({SpringExtension.class, MockitoExtension.class}) //OLD one was RUN WITH!!
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CurrencyIntegrationTesting {
@@ -65,7 +67,9 @@ public class CurrencyIntegrationTesting {
                 .header("content-type", "application/json");
 
         this.mockMvc.perform(mockHttpBuilt)
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)));
+//        .andExpect(jsonPath("$.orderId", is(DEFAULT_ORDER_ID)));
 
     }
 
