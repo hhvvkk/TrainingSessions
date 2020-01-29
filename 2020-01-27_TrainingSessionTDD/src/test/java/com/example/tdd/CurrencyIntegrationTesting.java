@@ -39,18 +39,6 @@ public class CurrencyIntegrationTesting {
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    CurrencyRepository currencyRepository;
-
-    @BeforeEach
-    public void init() {
-        Mockito
-                .lenient()
-                .when(currencyRepository.save(Mockito.any()))
-                .thenAnswer(AdditionalAnswers.returnsFirstArg());
-    }
-
-
     private ObjectMapper mapper = new ObjectMapper();
 
     @Test
