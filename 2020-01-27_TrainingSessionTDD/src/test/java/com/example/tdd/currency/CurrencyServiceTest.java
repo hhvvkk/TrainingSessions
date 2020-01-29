@@ -3,6 +3,7 @@ package com.example.tdd.currency;
 import com.example.tdd.currency.entity.Currency;
 import com.example.tdd.currency.entity.CurrencyType;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.AdditionalAnswers;
@@ -26,21 +27,25 @@ public class CurrencyServiceTest {
     @InjectMocks
     private static CurrencyService currencyService;
 
-    @Test
-    public void shouldReturnCurrencyCreated() {
-        CurrencyType RAND_CURRENCY = CurrencyType.RAND;
-        String fifteenName = "fifteen";
-        int fifteenInt = 15;
+    String fifteenName = "fifteen";
 
+    @BeforeEach
+    public void init() {
         Mockito
+                .lenient()
                 .when(englishConvertNumberToNameService.convertToString(Mockito.anyInt()))
-                .thenReturn(fifteenName);
+                .thenReturn("fifteen");
 
         Mockito
                 .lenient()
                 .when(currencyRepository.save(Mockito.any()))
                 .thenAnswer(AdditionalAnswers.returnsFirstArg());
+    }
 
+    @Test
+    public void shouldReturnCurrencyCreated() {
+        CurrencyType RAND_CURRENCY = CurrencyType.RAND;
+        int fifteenInt = 15;
 
         Currency currency = currencyService.save(RAND_CURRENCY, fifteenInt);
 

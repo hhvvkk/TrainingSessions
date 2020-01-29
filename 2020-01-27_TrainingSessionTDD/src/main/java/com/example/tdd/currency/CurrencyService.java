@@ -40,7 +40,8 @@ public class CurrencyService {
         currency.setType(type);
         currency.setValue(value);
 
-        return currencyRepository.save(currency);
+        currency = currencyRepository.save(currency);
+        return currency;
     }
 
 }
