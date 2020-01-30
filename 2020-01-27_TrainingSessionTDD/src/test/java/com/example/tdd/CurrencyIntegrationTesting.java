@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -46,14 +47,55 @@ public class CurrencyIntegrationTesting {
 
         MockHttpServletRequestBuilder mockHttpBuilt =
                 post("/currency")
-                .content(contentAsString)
-                .header("content-type", "application/json");
+                        .content(contentAsString)
+                        .header("content-type", "application/json");
 
         this.mockMvc.perform(mockHttpBuilt)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)))
                 .andExpect(jsonPath("$.englishNumberName", Matchers.is("twenty")));
 //        .andExpect(jsonPath("$.orderId", is(DEFAULT_ORDER_ID)));
+    }
+
+
+    @Test
+    public void shouldCreateCurrencyAndBeStoredInDatabase() throws Exception {
+        CurrencyDTO pundCurrency = new CurrencyDTO();
+        pundCurrency.setValue(20);
+        pundCurrency.setType(CurrencyType.POUND);
+
+        CurrencyDTO euroCurrency = new CurrencyDTO();
+        euroCurrency.setValue(15);
+        euroCurrency.setType(CurrencyType.EUROS);
+
+
+        String poundCurrencyAsString = mapper.writeValueAsString(pundCurrency);
+        String euroCurrencyAsString = mapper.writeValueAsString(pundCurrency);
+
+        MockHttpServletRequestBuilder firstCurrencyCreateHttp =
+                post("/currency")
+                        .content(poundCurrencyAsString)
+                        .header("content-type", "application/json");
+
+
+        MockHttpServletRequestBuilder secondCurrencyCreateHttp =
+                post("/currency")
+                        .content(euroCurrencyAsString)
+                        .header("content-type", "application/json");
+
+
+        this.mockMvc.perform(firstCurrencyCreateHttp);
+        this.mockMvc.perform(secondCurrencyCreateHttp);
+
+
+        MockHttpServletRequestBuilder getCurrenciesStoredHttp =
+                get("/currency")
+                        .header("content-type", "application/json");
+
+        this.mockMvc
+                .perform(getCurrenciesStoredHttp)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.hasSize(2)));
     }
 
     @Test
