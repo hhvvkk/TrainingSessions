@@ -27,14 +27,14 @@ public class CurrencyServiceTest {
     @InjectMocks
     private static CurrencyService currencyService;
 
-    String fifteenName = "fifteen";
+    private String fifteenName = "fifteen";
 
     @BeforeEach
     public void init() {
         Mockito
                 .lenient()
                 .when(englishConvertNumberToNameService.convertToString(Mockito.anyInt()))
-                .thenReturn("fifteen");
+                .thenReturn(fifteenName);
 
         Mockito
                 .lenient()

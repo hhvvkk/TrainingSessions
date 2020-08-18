@@ -1,4 +1,4 @@
-package com.example.tdd;
+package com.example.tdd.currency;
 
 import com.example.tdd.currency.CurrencyService;
 import com.example.tdd.currency.dto.CurrencyDTO;
