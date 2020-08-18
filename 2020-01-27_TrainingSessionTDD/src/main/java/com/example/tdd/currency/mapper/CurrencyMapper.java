@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class CurrencyMapper {
 
-    public abstract Currency toEntity(CurrencyDTO currencyDTO);
+    public abstract Currency toEntity(CurrencyDTO dto);
 
-    public abstract CurrencyDTO toDTO(Currency currency);
+    public abstract CurrencyDTO toDTO(Currency entity);
 
-    public List<CurrencyDTO> toDTOsList(List<Currency> articles) {
-        return articles
+    public List<CurrencyDTO> toDTOsList(List<Currency> entities) {
+        return entities
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
