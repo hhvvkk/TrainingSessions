@@ -78,7 +78,7 @@ public class PunctuationTest {
 
     @Test
     public void shouldReturnTrueForValidMixQutations() {
-        Assertions.assertFalse(
+        Assertions.assertTrue(
                 validPunctuationStringCheck.wellFormed(
                         "Should return false for Valid \" mix of ' punctuation ' \" used"
                 )
