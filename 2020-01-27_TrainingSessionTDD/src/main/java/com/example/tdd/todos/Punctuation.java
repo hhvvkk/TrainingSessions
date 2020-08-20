@@ -10,11 +10,11 @@ package com.example.tdd.todos;
  * -- {}
  */
 public class Punctuation {
-    public boolean hasWellFormedQuotations(String stringToCheck) {
+    public boolean wellFormed(String input) {
         int numberOfSingleQuotes = 0;
         int numberOfQuotation = 0;
 
-        for (char character: stringToCheck.toCharArray()) {
+        for (char character: input.toCharArray()) {
             if (character == '\'') {
                 numberOfSingleQuotes ++;
             } else if (character == '\"') {

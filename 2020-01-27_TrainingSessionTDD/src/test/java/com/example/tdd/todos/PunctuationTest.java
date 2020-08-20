@@ -17,13 +17,13 @@ public class PunctuationTest {
     @Test
     public void shouldReturnTrueForEmptyString() {
         String emptyString = "";
-        Assertions.assertTrue(validPunctuationStringCheck.hasWellFormedQuotations(emptyString));
+        Assertions.assertTrue(validPunctuationStringCheck.wellFormed(emptyString));
     }
 
     @Test
     public void shouldReturnTrueForValidSingleNoPunctuation() {
         Assertions.assertTrue(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string with no punctuation "
                 )
         );
@@ -33,7 +33,7 @@ public class PunctuationTest {
     @Test
     public void shouldReturnTrueForValidSingleQuotes() {
         Assertions.assertTrue(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string 'with a valid beginning and end' "
                 )
         );
@@ -42,7 +42,7 @@ public class PunctuationTest {
     @Test
     public void shouldReturnFalseForInValidSingleQuotes() {
         Assertions.assertFalse(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string 'with a valid beginning and end "
                 )
         );
@@ -51,7 +51,7 @@ public class PunctuationTest {
     @Test
     public void shouldReturnTrueForValidQuotation() {
         Assertions.assertTrue(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string \"with a valid beginning and end\" "
                 )
         );
@@ -60,7 +60,7 @@ public class PunctuationTest {
     @Test
     public void shouldReturnFalseForInValidQuotation() {
         Assertions.assertFalse(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string \"with a beginning"
                 )
         );
@@ -69,7 +69,7 @@ public class PunctuationTest {
     @Test
     public void shouldReturnTrueForValidCurlyBracket() {
         Assertions.assertTrue(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string {with a valid beginning and end}"
                 )
         );
@@ -78,13 +78,13 @@ public class PunctuationTest {
     @Test
     public void shouldReturnFalseForInValidCurlyBracket() {
         Assertions.assertFalse(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string {with a beginning"
                 )
         );
 
         Assertions.assertFalse(
-                validPunctuationStringCheck.hasWellFormedQuotations(
+                validPunctuationStringCheck.wellFormed(
                         "A string with an end}"
                 )
         );
