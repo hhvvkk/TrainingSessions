@@ -9,7 +9,7 @@ package com.example.tdd.todos;
  * -- []
  * -- {}
  */
-public class Quotation {
+public class Punctuation {
     public boolean hasWellFormedQuotations(String stringToCheck) {
         int numberOfSingleQuotes = 0;
         int numberOfQuotation = 0;
