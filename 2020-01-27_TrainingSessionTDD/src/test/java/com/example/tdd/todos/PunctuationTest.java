@@ -110,4 +110,29 @@ public class PunctuationTest {
     }
 
 
+    @Test
+    public void shouldReturnTrueForValidSquareBracket() {
+        Assertions.assertTrue(
+                validPunctuationStringCheck.wellFormed(
+                        "A string [with a valid beginning and end]"
+                )
+        );
+    }
+
+    @Test
+    public void shouldReturnFalseForInValidSquareBracket() {
+        Assertions.assertFalse(
+                validPunctuationStringCheck.wellFormed(
+                        "A string [with a beginning"
+                )
+        );
+
+        Assertions.assertFalse(
+                validPunctuationStringCheck.wellFormed(
+                        "A string with an end]"
+                )
+        );
+    }
+
+
 }
