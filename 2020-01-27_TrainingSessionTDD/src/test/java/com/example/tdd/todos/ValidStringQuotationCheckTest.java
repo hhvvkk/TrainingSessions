@@ -21,7 +21,7 @@ public class ValidStringQuotationCheckTest {
     }
 
     @Test
-    public void shouldReturnTrueForValidValidSingleQuotes() {
+    public void shouldReturnTrueForValidSingleQuotes() {
         String validSingleQuote = "A string 'with a valid beginning and end' parenthesis";
         String validSingleQuote2 = "A string 'with a valid beginning and end' parenthesis";
         String validSingleQuote3 = "A string 'with a valid beginning and end' parenthesis";
@@ -29,6 +29,17 @@ public class ValidStringQuotationCheckTest {
         Assertions.assertTrue(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote));
         Assertions.assertTrue(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote2));
         Assertions.assertTrue(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote3));
+    }
+
+    @Test
+    public void shouldReturnFalseForInValidSingleQuotes() {
+        String validSingleQuote = "A string 'with a valid beginning and end parenthesis";
+        String validSingleQuote2 = "A string 'with a valid beginning and end parenthesis";
+        String validSingleQuote3 = "A string 'with a valid beginning and end parenthesis";
+
+        Assertions.assertFalse(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote));
+        Assertions.assertFalse(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote2));
+        Assertions.assertFalse(validQuotationStringCheck.hasWellFormedQuotations(validSingleQuote3));
     }
 
 }

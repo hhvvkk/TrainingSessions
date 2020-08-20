@@ -11,6 +11,14 @@ package com.example.tdd.todos;
  */
 public class ValidStringQuotationCheck {
     public boolean hasWellFormedQuotations(String stringToCheck) {
-        return true;
+        int numberOfSingleQuotes = 0;
+
+        for (char character: stringToCheck.toCharArray()) {
+            if (character == '\'') {
+                numberOfSingleQuotes ++;
+            }
+        }
+
+        return numberOfSingleQuotes % 2 == 0;
     }
 }
