@@ -66,6 +66,25 @@ public class PunctuationTest {
         );
     }
 
+
+    @Test
+    public void shouldReturnFalseForInvalidMixQuotations() {
+        Assertions.assertFalse(
+                validPunctuationStringCheck.wellFormed(
+                        "Should return false for 'Invalid \" mix of punctuation ' \" used"
+                )
+        );
+    }
+
+    @Test
+    public void shouldReturnTrueForValidMixQutations() {
+        Assertions.assertFalse(
+                validPunctuationStringCheck.wellFormed(
+                        "Should return false for Valid \" mix of ' punctuation ' \" used"
+                )
+        );
+    }
+
     @Test
     public void shouldReturnTrueForValidCurlyBracket() {
         Assertions.assertTrue(
