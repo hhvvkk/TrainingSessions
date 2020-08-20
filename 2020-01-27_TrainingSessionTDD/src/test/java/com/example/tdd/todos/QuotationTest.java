@@ -3,7 +3,7 @@ package com.example.tdd.todos;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ValidStringQuotationCheckTest {
+public class QuotationTest {
 
     //TODO
     // - single quote '
@@ -12,7 +12,7 @@ public class ValidStringQuotationCheckTest {
     // -- The curly and block bracket should change the dynamic quite a bit
     // -
 
-    private final ValidStringQuotationCheck validQuotationStringCheck = new ValidStringQuotationCheck();
+    private final Quotation validQuotationStringCheck = new Quotation();
 
     @Test
     public void shouldReturnTrueForEmptyString() {
