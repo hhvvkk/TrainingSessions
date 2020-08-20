@@ -16,11 +16,11 @@ import java.util.Stack;
 public class Punctuation {
 
     private List<Character> begin = Arrays.asList(
-            '\'', '\"', '{'
+            '\'', '\"', '{', '['
     );
 
     private List<Character> end = Arrays.asList(
-            '\'', '\"', '}'
+            '\'', '\"', '}', ']'
     );
 
     public boolean wellFormed(String input) {
