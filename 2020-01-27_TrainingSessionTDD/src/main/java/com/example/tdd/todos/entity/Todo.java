@@ -14,9 +14,9 @@ public class Todo {
     private long id;
 
     @Column(name = "valid", nullable = false)
-    private boolean value;
+    private boolean valid;
 
-    @Column(name = "text", nullable =  false, length = 500)
-    private String englishNumberName;
+    @Column(name = "text", nullable =  false, length = 1000)
+    private String text;
 
 }
