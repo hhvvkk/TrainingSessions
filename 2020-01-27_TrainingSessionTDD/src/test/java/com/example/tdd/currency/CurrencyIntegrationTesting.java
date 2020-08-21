@@ -60,17 +60,17 @@ public class CurrencyIntegrationTesting {
 
     @Test
     public void shouldCreateCurrencyAndBeStoredInDatabase() throws Exception {
-        CurrencyDTO pundCurrency = new CurrencyDTO();
-        pundCurrency.setValue(20);
-        pundCurrency.setType(CurrencyType.POUND);
+        CurrencyDTO poundCurrency = new CurrencyDTO();
+        poundCurrency.setValue(20);
+        poundCurrency.setType(CurrencyType.POUND);
 
         CurrencyDTO euroCurrency = new CurrencyDTO();
         euroCurrency.setValue(15);
         euroCurrency.setType(CurrencyType.EUROS);
 
 
-        String poundCurrencyAsString = mapper.writeValueAsString(pundCurrency);
-        String euroCurrencyAsString = mapper.writeValueAsString(pundCurrency);
+        String poundCurrencyAsString = mapper.writeValueAsString(poundCurrency);
+        String euroCurrencyAsString = mapper.writeValueAsString(poundCurrency);
 
         MockHttpServletRequestBuilder firstCurrencyCreateHttp =
                 post("/currency")
