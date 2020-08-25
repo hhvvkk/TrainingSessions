@@ -19,14 +19,23 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public Todo create(Todo entity) {
+    public List<Todo> findAll() {
+        return todoRepository.findAll();
+    }
+
+    public Todo save(Todo entity) {
         if (Strings.isNullOrEmpty(entity.getText())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Todo text should be entered in");
         }
+
+        //TODO can be moved to entity itself
+        entity.setValid(Punctuation.wellFormed(entity.getText()));
+
         return todoRepository.save(entity);
     }
 
-    public List<Todo> findAll() {
-        return todoRepository.findAll();
+    public Todo find(Long id) {
+        return todoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Todo not found by id [%d]", id)));
     }
 }

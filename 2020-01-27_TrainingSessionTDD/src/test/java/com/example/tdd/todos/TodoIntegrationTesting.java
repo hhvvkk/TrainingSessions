@@ -3,6 +3,7 @@ package com.example.tdd.todos;
 
 import com.example.tdd.todos.dto.TodoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -46,43 +49,74 @@ public class TodoIntegrationTesting {
         this.mockMvc.perform(mockHttpBuilt)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)))
-                .andExpect(jsonPath("$.text", Matchers.is(TODO_TEXT)));
-//        .andExpect(jsonPath("$.orderId", is(DEFAULT_ORDER_ID)));
+                .andExpect(jsonPath("$.text", Matchers.is(TODO_TEXT)))
+                .andExpect(jsonPath("$.valid", Matchers.is(true)));
     }
-
 
     @Test
     public void shouldCreateCurrencyAndBeStoredInDatabase() throws Exception {
-        final String TODO_TEXT_SHOULD_GO_TO_MALL = "Should go to mall";
+        final String FIRST_TODO_TEXT = "Should go to mall";
+        final String SECOND_TODO_TEXT = "Should have a 'bath'";
+        final String THIRD_TODO_TEXT = "Finish off '2020";
+
         TodoDTO firstTODO = new TodoDTO();
-        firstTODO.setText(TODO_TEXT_SHOULD_GO_TO_MALL);
-
+        firstTODO.setText(FIRST_TODO_TEXT);
         TodoDTO secondTODO = new TodoDTO();
-        secondTODO.setText(TODO_TEXT_SHOULD_GO_TO_MALL);
+        secondTODO.setText(SECOND_TODO_TEXT);
+        TodoDTO thirdTODO = new TodoDTO();
+        thirdTODO.setText(THIRD_TODO_TEXT);
 
-        String firstTodoAsString = mapper.writeValueAsString(firstTODO);
-        String secondTodoAsString = mapper.writeValueAsString(secondTODO);
-
-        MockHttpServletRequestBuilder firstCurrencyCreateHttp = post("/todo")
-                .content(firstTodoAsString)
+        MockHttpServletRequestBuilder firstCreateHttp = post("/todo")
+                .content(mapper.writeValueAsString(firstTODO))
                 .header("content-type", "application/json");
 
-
-        MockHttpServletRequestBuilder secondCurrencyCreateHttp = post("/todo")
-                .content(secondTodoAsString)
+        MockHttpServletRequestBuilder secondCreateHttp = post("/todo")
+                .content(mapper.writeValueAsString(secondTODO))
                 .header("content-type", "application/json");
 
-        this.mockMvc.perform(firstCurrencyCreateHttp);
-        this.mockMvc.perform(secondCurrencyCreateHttp);
+        MockHttpServletRequestBuilder thirdCreateHttp = post("/todo")
+                .content(mapper.writeValueAsString(thirdTODO))
+                .header("content-type", "application/json");
 
+        MvcResult resultFirst = this.mockMvc.perform(firstCreateHttp)
+                .andExpect(jsonPath("$.id", Matchers.isA(Integer.class)))
+                .andExpect(jsonPath("$.text", Matchers.is(FIRST_TODO_TEXT)))
+                .andExpect(jsonPath("$.valid", Matchers.is(true)))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
 
-        MockHttpServletRequestBuilder getHttpRequest = get("/todo")
+        MvcResult resultSecond = this.mockMvc.perform(secondCreateHttp)
+                .andExpect(jsonPath("$.valid", Matchers.is(true)))
+                .andReturn();
+        MvcResult resultThird = this.mockMvc.perform(thirdCreateHttp)
+                .andExpect(jsonPath("$.valid", Matchers.is(false)))
+                .andReturn();
+
+        Integer firstTodoId = JsonPath.read(resultFirst.getResponse().getContentAsString(), "$.id");
+        Integer secondTodoId = JsonPath.read(resultSecond.getResponse().getContentAsString(), "$.id");
+        Integer thirdTodoId = JsonPath.read(resultThird.getResponse().getContentAsString(), "$.id");
+
+        MockHttpServletRequestBuilder getFirstTodoByIdHttp = get(String.format("/todo/%d", firstTodoId))
+                .header("content-type", "application/json");
+        MockHttpServletRequestBuilder getSecondTodoByIdHttp = get(String.format("/todo/%d", secondTodoId))
+                .header("content-type", "application/json");
+        MockHttpServletRequestBuilder getThirdTodoByIdHttp = get(String.format("/todo/%d", thirdTodoId))
                 .header("content-type", "application/json");
 
         this.mockMvc
-                .perform(getHttpRequest)
+                .perform(getFirstTodoByIdHttp)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", Matchers.hasSize(2)));
+                .andExpect(jsonPath("$.text", Matchers.is(FIRST_TODO_TEXT)));
+
+        this.mockMvc
+                .perform(getSecondTodoByIdHttp)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text", Matchers.is(SECOND_TODO_TEXT)));
+
+        this.mockMvc
+                .perform(getThirdTodoByIdHttp)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text", Matchers.is(THIRD_TODO_TEXT)));
     }
 
     @Test

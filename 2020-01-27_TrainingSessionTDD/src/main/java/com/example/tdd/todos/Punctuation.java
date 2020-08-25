@@ -15,15 +15,15 @@ import java.util.Stack;
  */
 public class Punctuation {
 
-    private List<Character> begin = Arrays.asList(
+    private static List<Character> begin = Arrays.asList(
             '\'', '\"', '{', '['
     );
 
-    private List<Character> end = Arrays.asList(
+    private static List<Character> end = Arrays.asList(
             '\'', '\"', '}', ']'
     );
 
-    public boolean wellFormed(String input) {
+    public static boolean wellFormed(String input) {
         Stack<Character> punctuationStack = new Stack<>();
 
         for (char character: input.toCharArray()){

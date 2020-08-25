@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Slf4j
@@ -21,20 +22,25 @@ public class TodoController {
 
     @Autowired
     public TodoController(TodoService todoService,
-                          TodoMapper todoMapper) {
+            TodoMapper todoMapper) {
         this.todoService = todoService;
         this.todoMapper = todoMapper;
     }
 
     @PostMapping
     public TodoDTO create(@RequestBody TodoDTO todoDTO) {
-        Todo todo = todoService.create(todoMapper.toEntity(todoDTO));
+        Todo todo = todoService.save(todoMapper.toEntity(todoDTO));
         return todoMapper.toDTO(todo);
     }
 
     @GetMapping
-    public List<TodoDTO> getAllTodos() {
+    public List<TodoDTO> findAllTodos() {
         List<Todo> todos = todoService.findAll();
         return todoMapper.toDTOsList(todos);
+    }
+
+    @GetMapping("{id}")
+    public TodoDTO find(@PathVariable("id") Long id) {
+        return todoMapper.toDTO(todoService.find(id));
     }
 }
