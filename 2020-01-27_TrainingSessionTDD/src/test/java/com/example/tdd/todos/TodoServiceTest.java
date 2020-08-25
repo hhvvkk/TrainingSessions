@@ -56,8 +56,18 @@ public class TodoServiceTest {
     }
 
     @Test
-    public void shouldThrowExceptionOnEmptyCurrency() {
+    public void shouldThrowExceptionOnEmptyTodoText() {
         Todo emptyTodoText = new Todo();
         Assertions.assertThrows(ResponseStatusException.class, () -> todoService.save(emptyTodoText));
+    }
+
+    @Test
+    public void shouldThrowExceptionOnFindNullIdTodo() {
+        Assertions.assertThrows(ResponseStatusException.class, () -> todoService.find(null));
+    }
+
+    @Test
+    public void shouldThrowExceptionOnFindInvalidIdTodo() {
+        Assertions.assertThrows(ResponseStatusException.class, () -> todoService.find((long) -1));
     }
 }

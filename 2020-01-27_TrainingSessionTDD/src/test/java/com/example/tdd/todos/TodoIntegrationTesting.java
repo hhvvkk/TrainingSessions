@@ -119,6 +119,21 @@ public class TodoIntegrationTesting {
                 .andExpect(jsonPath("$.text", Matchers.is(THIRD_TODO_TEXT)));
     }
 
+
+    @Test
+    public void shouldThrowBadRequestWhenInvalidTodoId() throws Exception {
+        MockHttpServletRequestBuilder mockHttpBuilt =
+                get("/todo/-1")
+                        .header("content-type", "application/json");
+
+        this.mockMvc
+                .perform(mockHttpBuilt)
+                .andExpect(
+                        status().is4xxClientError()
+                )
+        .andDo(MockMvcResultHandlers.print());
+    }
+
     @Test
     public void shouldThrow400InBadTodoText() throws Exception {
         TodoDTO dto = new TodoDTO();
