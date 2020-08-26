@@ -17,11 +17,16 @@ import org.springframework.web.server.ResponseStatusException;
 @ExtendWith(MockitoExtension.class)
 public class TodoServiceTest {
 
-    @Mock
-    private static TodoRepository todoRepository;
+    /**
+     *     @Mock
+     *     private static TodoRepository todoRepository;
+     *
+     *     @InjectMocks
+     *     private static TodoService todoService;
+     */
 
-    @InjectMocks
-    private static TodoService todoService;
+    private static final TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
+    private static final TodoService todoService = new TodoService(todoRepository);
 
     @BeforeEach
     public void init() {
@@ -48,11 +53,20 @@ public class TodoServiceTest {
     }
 
     @Test
-    public void shouldReturnValidTodoWhenTextIsInValidForDoubleBracket() {
+    public void shouldReturnValidTodoWhenTextIsValidForDoubleBracket() {
+        Todo todo = new Todo();
+        todo.setText("My text here 'this is a valid text'");
+        todo = todoService.save(todo);
+        Assertions.assertTrue(todo.isValid());
+    }
+
+    @Test
+    public void shouldSaveTodoWhenSaveFunctionCalled() {
         Todo todo = new Todo();
         todo.setText("My text here 'this is invalid'");
         todo = todoService.save(todo);
-        Assertions.assertTrue(todo.isValid());
+        Mockito.verify(todoRepository, Mockito.atLeast(1)).save(Mockito.any(Todo.class));
+        //careful with verify - this will verify across tests - since we use the same Mock
     }
 
     @Test

@@ -1,6 +1,5 @@
 package com.example.tdd.todos;
 
-
 import com.example.tdd.todos.dto.TodoDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
@@ -22,11 +21,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith({SpringExtension.class, MockitoExtension.class}) //OLD one was RUN WITH!!
-@SpringBootTest
-@AutoConfigureMockMvc
-public class TodoIntegrationTesting {
+// @ActiveProfiles("testDatabaseProfile")
+// @WebMvcTest
+// @AutoConfigureWebMvc
 
+@ExtendWith({SpringExtension.class, MockitoExtension.class}) //OLD one was RUN WITH!! -- @RunsWith
+@SpringBootTest // --->  With the @SpringBootTest annotation, Spring Boot provides a convenient way to start up an application context to be used in a test.
+@AutoConfigureMockMvc // --->  With the @SpringBootTest annotation, Spring Boot provides a convenient way to start up an application context to be used in a test.
+public class TodoIntegrationTesting {
 
     @Autowired
     private MockMvc mockMvc;
