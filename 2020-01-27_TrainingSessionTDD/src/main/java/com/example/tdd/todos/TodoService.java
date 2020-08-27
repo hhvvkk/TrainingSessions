@@ -24,15 +24,12 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Todo save(Todo entity) {
-        if (Strings.isNullOrEmpty(entity.getText())) {
+    public Todo save(Todo todo) {
+        if (Strings.isNullOrEmpty(todo.getText())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Todo text should be entered in");
         }
-
-        //TODO can be moved to entity itself
-        entity.setValid(Punctuation.wellFormed(entity.getText()));
-
-        return todoRepository.save(entity);
+        todo.setValid(Punctuation.wellFormed(todo.getText()));
+        return todoRepository.save(todo);
     }
 
     public Todo find(Long id) {

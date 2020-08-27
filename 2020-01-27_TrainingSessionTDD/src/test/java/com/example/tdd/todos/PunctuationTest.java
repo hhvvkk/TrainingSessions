@@ -13,132 +13,41 @@ public class PunctuationTest {
     // - then quotations "
     // - then curly bracket {} and []
 
+    public static final List<String> IN_VALID_STRINGS = Arrays.asList(
+            "We have a String with beginning ' and end quotes",
+            "We have a String with beginning ' ' 'and end quotes",
+            "A String with beginning \" and end double quotes",
+            "A String with beginning \" \" \" and end double quotes",
+            "A String with beginning \" ' in between \" 'and end double quotes",
+            "A string with curly beginning { no end",
+            "A string with curly end } no beginning",
+            "A string with block end [ no beginning",
+            "A string with curly end ] no beginning"
+    );
+
+    public static final List<String> VALID_STRINGS = Arrays.asList(
+            "We have a String with beginning ' and end ' quotes",
+            "A String with beginning \" and end \" double quotes",
+            "",
+            "A String that has single 'quote' and double \"quotes\"",
+            "A string with curly beginning { and } end",
+            "A string with curly beginning [ and ] end",
+            "A string with beginning [ {and} ] end",
+            "A string with beginning \"[' {and}' ]\" end"
+    );
+
     @Test
-    public void shouldReturnTrueForEmptyString() {
-        String emptyString = "";
-        Assertions.assertTrue(Punctuation.wellFormed(emptyString));
+    public void shouldReturnTrueForValidPunctuation() {
+        for (String toTest: VALID_STRINGS){
+            Assertions.assertTrue(Punctuation.wellFormed(toTest));
+        }
     }
 
     @Test
-    public void shouldReturnTrueForValidSingleNoPunctuation() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "A string with no punctuation "
-                )
-        );
-    }
-
-
-    @Test
-    public void shouldReturnTrueForValidSingleQuotes() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "A string 'with a valid beginning and end' "
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnFalseForInValidSingleQuotes() {
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string 'with a valid beginning and end "
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnTrueForValidQuotation() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "A string \"with a valid beginning and end\" "
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnFalseForInValidQuotation() {
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string \"with a beginning"
-                )
-        );
-    }
-
-
-    @Test
-    public void shouldReturnFalseForInvalidMixQuotations() {
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "Should return false for 'Invalid \" mix of punctuation ' \" used"
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnTrueForValidMixQutations() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "Should return false for Valid \" mix of ' punctuation ' \" used"
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnTrueForValidCurlyBracket() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "A string {with a valid beginning and end}"
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnFalseForInValidCurlyBracket() {
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string {with a beginning"
-                )
-        );
-
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string with an end}"
-                )
-        );
-    }
-
-
-    @Test
-    public void shouldReturnTrueForValidSquareBracket() {
-        Assertions.assertTrue(
-                Punctuation.wellFormed(
-                        "A string [with a valid beginning and end]"
-                )
-        );
-    }
-
-    @Test
-    public void shouldReturnFalseForInValidSquareBracket() {
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string [with a beginning"
-                )
-        );
-
-        Assertions.assertFalse(
-                Punctuation.wellFormed(
-                        "A string with an end]"
-                )
-        );
-    }
-
-    @Test
-    public void testMultiple() {
-        List<String> arrayOfValidStrings = Arrays.asList(
-        );
-
-        //TODO
+    public void shouldReturnFalseForInValidPunctuation() {
+        for (String toTest: IN_VALID_STRINGS){
+            Assertions.assertFalse(Punctuation.wellFormed(toTest));
+        }
     }
 
 

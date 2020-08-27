@@ -41,7 +41,7 @@ public class TodoIntegrationTesting {
         TodoDTO dto = new TodoDTO();
         dto.setText(TODO_TEXT);
 
-        String contentAsString = mapper.writeValueAsString(dto);
+        String contentAsString = mapper.writeValueAsString(dto); // Mapped to JSON-String
 
         MockHttpServletRequestBuilder mockHttpBuilt =
                 post("/todo")
@@ -56,7 +56,7 @@ public class TodoIntegrationTesting {
     }
 
     @Test
-    public void shouldCreateCurrencyAndBeStoredInDatabase() throws Exception {
+    public void shouldCreateManyTodosAndBeStoredInDatabase() throws Exception {
         final String FIRST_TODO_TEXT = "Should go to mall";
         final String SECOND_TODO_TEXT = "Should have a 'bath'";
         final String THIRD_TODO_TEXT = "Finish off '2020";
@@ -120,7 +120,6 @@ public class TodoIntegrationTesting {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.text", Matchers.is(THIRD_TODO_TEXT)));
     }
-
 
     @Test
     public void shouldThrowBadRequestWhenInvalidTodoId() throws Exception {
